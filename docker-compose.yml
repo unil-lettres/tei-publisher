@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  teipublisher:
+    image: existdb/teipublisher:8.0.0
+    volumes:
+      - ./data:/exist/data
+    ports:
+      - "127.0.0.1:9010:8080"
+    container_name: teipublisher

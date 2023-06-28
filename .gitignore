@@ -1,0 +1,11 @@
+# Ignore structural folders
+data/*
+!data/.gitkeep
+
+# Ignore IDE configuration folder
+.idea
+.vscode
+
+# Ignore configuration files
+.env
+docker-compose.override.yml
