@@ -59,7 +59,8 @@ requested header has the `X-Forwarded-Host` param.
 
 To fix it, go to `eXide - XQuery IDE` app from eXist-db launcher. Click on
 the `directory` tab on the left pane and navigate
-to `db -> apps -> <my app> -> modules -> config.xqm`. Search for the `$config:context-path` declaration and change the empty string of `then ("")` with the app url (see below).
+to `db -> apps -> <my app> -> modules -> config.xqm`. Search for the `$config:context-path` 
+declaration and change the empty string of `then ("")` with the app url (see below).
 
 ```xquery
 declare variable $config:context-path :=
@@ -77,6 +78,9 @@ declare variable $config:context-path :=
         )  
 ;
 ```
+
+> You should note that this change is made for a proxy that redirect the traffic
+without altering the default path of eXist - db. You must adjust the path regarding of your proxy configuration.
 
 ## Ressources
 
