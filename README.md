@@ -42,6 +42,44 @@ You can upgrade TEI-Publisher from the admin panel. Don't forget to update
 
 # Documentation
 
+## Fix TEI generated app `Ooops` error
+
+When you generate an app from the TEI-Publisher app (`Admin` in toolbar
+then `App Generator`)
+while running TEI-Publisher behind a proxy, you will see this error:
+
+```
+Ooops
+
+The request to the server failed.: undefined
+```
+
+It comes from the `$config:context-path` variable seted as `""` if the
+requested header has the `X-Forwarded-Host` param.
+
+To fix it, go to `eXide - XQuery IDE` app from eXist-db launcher. Click on
+the `directory` tab on the left pane and navigate
+to `db -> apps -> <my app> -> modules -> config.xqm`. Search for the `$config:context-path` declaration and change the empty string of `then ("")` with the app url (see below).
+
+```xquery
+declare variable $config:context-path :=
+    
+    let $prop := util:system-property("teipublisher.context-path")
+
+    return
+        if (not(empty($prop)) and $prop != "auto") 
+            then ($prop)
+        else if(not(empty(request:get-header("X-Forwarded-Host"))))
+            (: CHANGE HERE BY then ("/exist/apps/<my app>") :)
+            then ("")  
+        else ( 
+            request:get-context-path() || substring-after($config:app-root, "/db") 
+        )  
+;
+```
+
+## Ressources
+
 * [Goods production practices](https://exist-db.org/exist/apps/doc/production_good_practice)
 * [eXist-db users and groups](https://exist-db.org/exist/apps/doc/security)
 * [Create and host your own Docker image for single TEI-Publisher app](https://faq.teipublisher.com/hosting/docker-compose/)
