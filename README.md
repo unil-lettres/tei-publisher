@@ -57,7 +57,13 @@ The request to the server failed.: undefined
 It comes from the `$config:context-path` variable seted as `""` if the
 requested header has the `X-Forwarded-Host` param.
 
-To fix it, go to `eXide - XQuery IDE` app from eXist-db launcher. Click on
+You can either set CONTEXT_PATH ENV when building the TEI Docker image.
+
+Or run the jetty server with the -Dteipublisher.context-path="my-app"
+params.
+
+Or you can directly configure it in your app.
+Go to `eXide - XQuery IDE` app from eXist-db launcher. Click on
 the `directory` tab on the left pane and navigate
 to `db -> apps -> <my app> -> modules -> config.xqm`. Search for the `$config:context-path` 
 declaration and change the empty string of `then ("")` with the app url (see below).
