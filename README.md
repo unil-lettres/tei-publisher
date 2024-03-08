@@ -54,7 +54,7 @@ Ooops
 The request to the server failed.: undefined
 ```
 
-It comes from the `$config:context-path` variable seted as `""` if the
+It comes from the `$config:context-path` variable set as `""` if the
 requested header has the `X-Forwarded-Host` param.
 
 You can either set CONTEXT_PATH ENV when building the TEI Docker image.
