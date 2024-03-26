@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   teipublisher:
     image: existdb/teipublisher:8.0.0
