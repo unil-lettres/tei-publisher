@@ -1,6 +1,6 @@
 services:
   teipublisher:
-    image: existdb/teipublisher:8.0.0
+    image: existdb/teipublisher:9.0.0
     volumes:
       - ./data:/exist/data
     ports:
