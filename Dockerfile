@@ -19,7 +19,7 @@ RUN curl -L -o /tmp/packages/templating-${TEMPLATING_VERSION}.xar http://exist-d
 
 FROM duncdrum/existdb:${EXISTDB_VERSION} AS existdb
 
-# Copy custom configurationf files.
+# Copy custom configuration files.
 COPY ./conf/conf.xml /exist/etc/conf.xml
 COPY ./conf/web.xml /exist/etc/webapp/WEB-INF/web.xml
 COPY ./conf/controller-config.xml /exist/etc/webapp/WEB-INF/controller-config.xml
@@ -62,3 +62,8 @@ ENV JAVA_TOOL_OPTIONS \
 RUN [ "java", "org.exist.start.Main", "client", "--no-gui",  "-l" ]
 
 EXPOSE ${HTTP_PORT} ${HTTPS_PORT}
+
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN [ "chmod", "+x", "/usr/local/bin/entrypoint.sh" ]
+ENTRYPOINT [ "entrypoint.sh" ]
+CMD ["java", "org.exist.start.Main", "jetty"]

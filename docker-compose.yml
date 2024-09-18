@@ -1,8 +1,15 @@
 services:
   teipublisher:
-    image: existdb/teipublisher:9.0.0
+    image: unillett/existdb-tei-publisher:${DOCKER_IMAGE_TAG}
+    build:
+        context: .
     volumes:
-      - ./data:/exist/data
+      - exist-data:/exist/data
+      - ./autodeploy:/src/autodeploy
     ports:
-      - "127.0.0.1:9010:8080"
-    container_name: teipublisher
+      - "127.0.0.1:${DOCKER_HOST_PORT}:8080"
+    container_name: ${DOCKER_CONTAINER_NAME}
+
+volumes:
+  exist-data:
+    name: ${DOCKER_VOLUME_NAME}

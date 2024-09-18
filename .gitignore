@@ -1,6 +1,6 @@
 # Ignore structural folders
-data/*
-!data/.gitkeep
+autodeploy/*
+!autodeploy/.gitkeep
 
 # Ignore IDE configuration folder
 .idea
