@@ -9,3 +9,6 @@ autodeploy/*
 # Ignore configuration files
 .env
 docker-compose.override.yml
+conf/conf.xml
+conf/web.xml
+conf/controller-config.xml

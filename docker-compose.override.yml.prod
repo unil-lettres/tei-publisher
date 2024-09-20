@@ -4,6 +4,10 @@
 
 services:
   teipublisher:
+    volumes:
+      - ./conf/conf.xml:/exist/etc/conf.xml
+      - ./conf/web.xml:/exist/etc/webapp/WEB-INF/web.xml
+      - ./conf/controller-config.xml:/exist/etc/webapp/WEB-INF/controller-config.xml
     restart: unless-stopped
     deploy:
       mode: global

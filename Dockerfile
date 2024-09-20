@@ -19,11 +19,6 @@ RUN curl -L -o /tmp/packages/templating-${TEMPLATING_VERSION}.xar http://exist-d
 
 FROM duncdrum/existdb:${EXISTDB_VERSION} AS existdb
 
-# Copy custom configuration files.
-COPY ./conf/conf.xml /exist/etc/conf.xml
-COPY ./conf/web.xml /exist/etc/webapp/WEB-INF/web.xml
-COPY ./conf/controller-config.xml /exist/etc/webapp/WEB-INF/controller-config.xml
-
 WORKDIR /exist
 
 COPY --from=sources /tmp/packages/*.xar /exist/autodeploy/
