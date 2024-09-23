@@ -103,6 +103,12 @@ It can be done in the `docker-compose.yml` file:
 
  ```
 
+ You must rebuild the image if you use this method.
+
+```bash
+docker compose build
+```
+
 ### When running the jetty server
 
 Run the server with the `-Dteipublisher.context-path=/path/to/my/app`.
