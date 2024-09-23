@@ -47,8 +47,8 @@ jobs:
             ROUTER_VERSION=${{ env.ROUTER_VERSION }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-dev' }}
-          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-dev' }}
+          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-stage' }}
+          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-stage' }}
           cache-to: type=inline
 
       - name: Build and push tagged version
