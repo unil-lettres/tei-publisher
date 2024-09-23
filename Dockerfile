@@ -27,9 +27,6 @@ COPY --from=sources /tmp/*.xar /exist/autodeploy/
 ARG HTTP_PORT=8080
 ARG HTTPS_PORT=8443
 
-# Adjust CONTEXT_PATH if the app is served from a subfolder.
-ARG CONTEXT_PATH=auto
-
 ARG NER_ENDPOINT=http://localhost:8001
 ARG PROXY_CACHING=false
 
@@ -45,7 +42,6 @@ ENV JAVA_TOOL_OPTIONS \
   -Djetty.home=/exist \
   -Dexist.jetty.config=/exist/etc/jetty/standard.enabled-jetty-configs \
   -Dteipublisher.ner-endpoint=${NER_ENDPOINT} \
-  -Dteipublisher.context-path=${CONTEXT_PATH} \
   -Dteipublisher.proxy-caching=${PROXY_CACHING} \
   -XX:+UseG1GC \
   -XX:+UseStringDeduplication \

@@ -7,5 +7,8 @@ if find "/src/autodeploy" -maxdepth 1 -type f ! -name ".*" | read; then
     cp -v /src/autodeploy/* /exist/autodeploy
 fi
 
+# Append -Dteipublisher.context-path=${TEIPUBLISHER_CONTEXT_PATH} to JAVA_TOOL_OPTIONS variable
+export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS} -Dteipublisher.context-path=${TEIPUBLISHER_CONTEXT_PATH}"
+
 # Start the main process
 exec "$@"
