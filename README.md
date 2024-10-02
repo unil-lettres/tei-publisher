@@ -57,6 +57,11 @@ These files are configured for production use. Tweak them to suit your needs.
 The `.orig` files are used to easily compare the changes made for the production
 configurations.
 
+> Be carefull that the prod config files is configured to be used in production by following exist-db guidelines.
+For example, it restricts the access to the REST API from outside. Be cautious that these configurations can causes errors for some apps.
+If you have errors (like HTTP 404 errors) that only occurs on this exist-db server, try to revert the configuration to the original
+by `diff` them from the default one (they are identified by `.orig` suffix). Be aware that will lead to a less secured server.
+
 ## Install your own packages
 Just put your `.xar` packages in the autodeploy folder. Then restart the
 container to deploy them automatically.
@@ -246,7 +251,7 @@ Accessing your app from `http://<servername>`.
 `.env`
 ```env
 # For existdb dashboard, leave the default value.
-TEIPUBLISHER_CONTEXT_PATH=/
+TEIPUBLISHER_CONTEXT_PATH=
 ```
 
 `myapp.cnf`
