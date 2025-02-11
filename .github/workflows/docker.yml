@@ -4,6 +4,7 @@ on:
     branches:
       - "development"
       - "main"
+
 env:
   # From https://hub.docker.com/r/duncdrum/existdb/tags
   EXISTDB_VERSION: 6.2.0-debug-j8
@@ -11,10 +12,9 @@ env:
   TEMPLATING_VERSION: 1.1.0
   PUBLISHER_LIB_VERSION: 4.0.0
   ROUTER_VERSION: 1.8.0
-  DOCKERHUB_REPOSITORY: unillett/existdb-tei-publisher
 
 jobs:
-  docker:
+  build-and-push:
     name: Build & Push
     runs-on: ubuntu-latest
 
@@ -47,8 +47,8 @@ jobs:
             ROUTER_VERSION=${{ env.ROUTER_VERSION }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-stage' }}
-          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-stage' }}
+          tags: ${{ vars.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-stage' }}
+          cache-from: type=registry,ref=${{ vars.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/main' && 'latest' || 'latest-stage' }}
           cache-to: type=inline
 
       - name: Build and push tagged version
@@ -65,14 +65,14 @@ jobs:
             ROUTER_VERSION=${{ env.ROUTER_VERSION }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ env.EXISTDB_VERSION }}-core${{ env.PUBLISHER_LIB_VERSION }}
-          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest
+          tags: ${{ vars.DOCKERHUB_REPOSITORY }}:${{ env.EXISTDB_VERSION }}-core${{ env.PUBLISHER_LIB_VERSION }}
+          cache-from: type=registry,ref=${{ vars.DOCKERHUB_REPOSITORY }}:latest
           cache-to: type=inline
 
-  description:
-    name: Update description
+  update-description:
+    name: Update Description
     runs-on: ubuntu-latest
-    needs: docker
+    needs: [build-and-push]
     if: success()
     continue-on-error: false
 
@@ -85,4 +85,4 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: ${{ env.DOCKERHUB_REPOSITORY }}
+          repository: ${{ vars.DOCKERHUB_REPOSITORY }}
