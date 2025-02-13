@@ -70,6 +70,22 @@ container to deploy them automatically.
 docker compose restart
 ```
 
+Updating your packages will not works with this method. You need to uninstall it
+and reinstall it before restarting the server:
+
+```bash
+# Set <container name> and <admin password> to your needs.
+
+# List installed packages to get the id of your app.
+docker exec <container name> java org.exist.start.Main client -q -u admin -P '<admin password>' -x 'repo:list()'
+
+# Uninstall it. Set <app id>.
+docker exec <container name> java org.exist.start.Main client -q -u admin -P '<admin password>' -x 'repo:undeploy("<app id>")'
+docker exec <container name> java org.exist.start.Main client -q -u admin -P '<admin password>' -x 'repo:remove("<app id>")'
+
+docker compose restart
+```
+
 ## Using a Proxy
 It is strongly recommended to put your application behind a proxy so you can't
 access exist-db dashboard and other apps (eXide, etc...).
