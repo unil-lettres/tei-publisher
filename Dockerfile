@@ -1,3 +1,5 @@
+# Taken from https://github.com/eeditiones/tei-publisher-app/blob/91738f30d1e8903b394d8ddfdd5ec68dd33fb15d/Dockerfile#L84
+
 ARG EXISTDB_VERSION=6.2.0-debug-j8
 
 FROM debian:latest AS sources
