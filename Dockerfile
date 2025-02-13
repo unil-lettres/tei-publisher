@@ -31,13 +31,15 @@ ARG HTTPS_PORT=8443
 
 ARG NER_ENDPOINT=http://localhost:8001
 ARG PROXY_CACHING=false
+ARG CACHE_MEM=256
+ARG MAX_BROKER=20
+ARG JVM_MAX_RAM_PERCENTAGE=75.0
 
-ENV JAVA_TOOL_OPTIONS \
-  -Dfile.encoding=UTF8 \
+ENV JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8 \
   -Dsun.jnu.encoding=UTF-8 \
   -Djava.awt.headless=true \
-  -Dorg.exist.db-connection.cacheSize=${CACHE_MEM:-256}M \
-  -Dorg.exist.db-connection.pool.max=${MAX_BROKER:-20} \
+  -Dorg.exist.db-connection.cacheSize=${CACHE_MEM}M \
+  -Dorg.exist.db-connection.pool.max=${MAX_BROKER} \
   -Dlog4j.configurationFile=/exist/etc/log4j2.xml \
   -Dexist.home=/exist \
   -Dexist.configurationFile=/exist/etc/conf.xml \
@@ -48,8 +50,8 @@ ENV JAVA_TOOL_OPTIONS \
   -XX:+UseG1GC \
   -XX:+UseStringDeduplication \
   -XX:+UseContainerSupport \
-  -XX:MaxRAMPercentage=${JVM_MAX_RAM_PERCENTAGE:-75.0} \
-  -XX:+ExitOnOutOfMemoryError
+  -XX:MaxRAMPercentage=${JVM_MAX_RAM_PERCENTAGE} \
+  -XX:+ExitOnOutOfMemoryError"
 
 # pre-populate the database by launching it once
 RUN [ "java", "org.exist.start.Main", "client", "--no-gui",  "-l" ]
