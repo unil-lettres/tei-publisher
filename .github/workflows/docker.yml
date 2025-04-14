@@ -4,6 +4,7 @@ on:
     branches:
       - "development"
       - "main"
+permissions: read-all
 
 env:
   # From https://hub.docker.com/r/duncdrum/existdb/tags
