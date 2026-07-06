@@ -1,12 +1,13 @@
 # Taken from https://github.com/eeditiones/tei-publisher-app/blob/91738f30d1e8903b394d8ddfdd5ec68dd33fb15d/Dockerfile#L84
 
-ARG EXISTDB_VERSION=6.2.0-debug-j8
+# -debug uses non-distroless version, which is necessary for executing entrypoint.sh script
+ARG EXISTDB_VERSION=6.4.0-debug-slim
 
 FROM debian:latest AS sources
 
-ARG ROUTER_VERSION=1.8.0
-ARG PUBLISHER_LIB_VERSION=4.0.0
-ARG TEMPLATING_VERSION=1.1.0
+ARG ROUTER_VERSION=1.11.0
+ARG PUBLISHER_LIB_VERSION=4.0.4
+ARG TEMPLATING_VERSION=1.2.1
 
 USER root
 
