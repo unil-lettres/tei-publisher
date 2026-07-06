@@ -7,10 +7,10 @@ permissions: read-all
 
 env:
   # From https://hub.docker.com/r/duncdrum/existdb/tags
-  EXISTDB_VERSION: 6.2.0-debug-j8
-  TEMPLATING_VERSION: 1.1.0
-  PUBLISHER_LIB_VERSION: 4.0.0
-  ROUTER_VERSION: 1.8.0
+  EXISTDB_VERSION: 6.4.0-debug-slim
+  TEMPLATING_VERSION: 1.2.1
+  PUBLISHER_LIB_VERSION: 4.0.4
+  ROUTER_VERSION: 1.11.0
 
 jobs:
   build:
