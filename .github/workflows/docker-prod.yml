@@ -9,7 +9,7 @@ env:
   # From https://hub.docker.com/r/duncdrum/existdb/tags
   EXISTDB_VERSION: 6.4.0-debug-slim
   TEMPLATING_VERSION: 1.2.1
-  PUBLISHER_LIB_VERSION: 4.0.4
+  PUBLISHER_LIB_VERSION: 6.1.0
   ROUTER_VERSION: 1.11.0
 
 jobs:
