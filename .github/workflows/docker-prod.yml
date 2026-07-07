@@ -11,6 +11,8 @@ env:
   TEMPLATING_VERSION: 1.2.1
   PUBLISHER_LIB_VERSION: 6.1.0
   ROUTER_VERSION: 1.11.0
+  # Named tags are immutable, define a revision if you need to update the image without changing the version number.
+  REVISION: rev-1
 
 jobs:
   build:
@@ -69,7 +71,8 @@ jobs:
         with:
           image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
           tag: latest
-          additional_tag: ${{ env.EXISTDB_VERSION }}-core${{ env.PUBLISHER_LIB_VERSION }}
+          additional_tag: >-
+            ${{ env.EXISTDB_VERSION }}-core${{ env.PUBLISHER_LIB_VERSION }}${{ env.REVISION != '' && format('-{0}', env.REVISION) || '' }}
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
 
